@@ -350,13 +350,11 @@ if params['APS']:
         log[Name]['Bipartite Optimized Average Co Authors'] = Avauth_Best_b
         log[Name]['Initial Average Co Authors'] = Avauth_initial
 
+    if not os.path.exists(params["logging_path"]):
+        # Create the folder if it doesn't exist
+        os.makedirs(params["logging_path"])
 
-
-
-
-
-
-    with open(params["logging_path"]+"log_APS_attack"+str(params["Natt"])+".json", "w") as write_file:
+    with open(params["logging_path"]+"log_attack"+str(params["Natt"])+".json", "w") as write_file:
         json.dump(log, write_file)
 
 
