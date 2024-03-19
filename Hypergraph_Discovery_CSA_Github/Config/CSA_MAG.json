@@ -1,0 +1,25 @@
+{
+    "data": "MAG",
+    "Algorithm": "CSA",
+    "epochs": 1,
+    "Nt": 5,
+    "tol": 1e-5,
+    "temp": 5,
+    "temp_decay": 0.99,
+    "Factor_penalty": 1,
+    "logging_path": "./MAG_Optimized/MAG_Log/",
+    "res_path": "./MAG_Optimized/MAG_Optimized_MAG_Hypergraph_Title_Only_pack1_New3/",
+    "folder_path": "./data/MAG/",
+    "nremove": 100,
+    "nswaps": 10,
+    "pack" : 1,
+    "sym": false,
+    "pen": 1,
+    "pen1": 1,
+    "pen2": 3,
+    "pen3": 1,
+    "return": 0.1
+
+
+
+}

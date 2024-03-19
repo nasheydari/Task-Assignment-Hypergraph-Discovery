@@ -1,0 +1,25 @@
+{
+    "APS" : true,
+    "Bipartite_APS" : true,
+    "Best_APS": true,
+    "Initial_APS": true,
+    "Greedy_APS": true,
+    "MAG": true,
+    "Bipartite_MAG": true,
+    "Best_MAG": true,
+    "Greedy_MAG": true,
+    "Initial_MAG": true,
+
+    "Natt": 2,
+    "logging_path": "./Attack Results/",
+    "res_path_APS": "./APS_Optimized/APS_Optimized_2Year_New/",
+    "res_path_APS_Bipartite": "./APS_Optimized/APS_Optimized_2Year_Bipartite/",
+    "res_path_MAG": "./MAG_Optimized/MAG_Optimized_MAG_Hypergraph_Title_Only_pack1_New3/",
+    "res_path_MAG_Bipartite": "./MAG_Optimized/MAG_Bipartite_Optimized_MAG_Hypergraph_Title_Only_pack1_New3/",
+    "folder_path_APS": "./data/APS/2Years/",
+    "folder_path_MAG": "./data/MAG/",
+    "niter": 10
+
+
+
+}

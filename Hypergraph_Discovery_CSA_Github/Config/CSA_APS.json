@@ -1,0 +1,24 @@
+{
+    "data": "APS",
+    "Algorithm": "CSA",
+    "epochs": 5e3,
+    "Nt": 5,
+    "tol": 1e-5,
+    "temp": 5,
+    "temp_decay": 0.997,
+    "logging_path": "./APS_Optimized/APS_2Years_Log/APS_2Years_Log.log",
+    "res_path": "./APS_Optimized/APS_Optimized_2Year_New/",
+    "folder_path": "./data/APS/2Years/",
+    "nremove": 100,
+    "nswaps": 10,
+    "pack" : 1,
+    "sym": false,
+    "pen": 1,
+    "pen1": 1,
+    "pen2": 3,
+    "pen3": 1,
+    "return": 0.1
+
+
+
+}
