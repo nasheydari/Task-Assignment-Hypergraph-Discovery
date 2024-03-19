@@ -28,7 +28,7 @@ Set the config file in configs directory and run "run.py" with the specified con
    - folder_path: data folder path
    - res_path: result saving path
 
-#### Training Parameters
+#### Optimization Parameters
    - epoch: number of optimization rounds
    - Nt: number of optimization rounds for each temperature
    - tol: convergence tolerace
