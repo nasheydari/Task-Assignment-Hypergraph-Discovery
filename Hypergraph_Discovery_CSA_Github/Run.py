@@ -26,6 +26,9 @@ def Run_exp(params):
 
 
             logging_path = params['logging_path']
+            if not os.path.exists(logging_path):
+                # Create the folder if it doesn't exist
+                os.makedirs(logging_path)
             logging.basicConfig(filename=logging_path, filemode='w', level=logging.INFO)
             log = logging.getLogger('main')
 
@@ -61,7 +64,7 @@ def Run_exp(params):
 
 
 
-            # Run and save the optimization
+            # Run the optimization
             if params["Algorithm"]=="CSA":
                 [Best, Best_ex, PFBest, AlgCon, AlgCon_best, penalty_fun, Avtask, AvCoauth, Avauth, MaxT, MinT, VarT, Avtask_c, AvCoauth_c,
                 Avauth_c, MaxT_c, MinT_c, VarT_c, best_10, eVec, e1Vec, etVec, eVecB, e1VecB, etVecB] = run_CSA(params['epochs'], file,                                                                                            I, I_ex,
@@ -106,12 +109,12 @@ def Run_exp(params):
                 if params["Algorithm"] == 'Greedy':
 
                     projection = 'hypergraph'
-                    start_time = time.time()
+                    start_time = timeit.default_timer()
                     I0_connected, gamma0_connected = greedy_connected_initialisation(budget, energy)
                     I_phase1, OptimisingTrack_phase1, gamma_phase1 = Greedy_bestagent_parallel(budget, energy, I0_connected,
                                                                                                gamma0_connected, n_proc,
                                                                                                projection)
-                    end_time = time.time()
+                    end_time = timeit.default_timer()
                 elif params["Algorithm"] == 'RandomGreedy':
                     Nagents_thres = 100
                     projection = 'hypergraph'
@@ -142,40 +145,118 @@ def Run_exp(params):
                 log.info(f'{files}:, running time: {time}')
 
                 path = params['res_path']
+                if not os.path.exists(path):
+                    # Create the folder if it doesn't exist
+                    os.makedirs(path)
+
+                folder_name = 'names'
+                folder_path = os.path.join(path, folder_name)
+                if not os.path.exists(folder_path):
+                    # Create the folder if it doesn't exist
+                    os.makedirs(folder_path)
+
                 name = './names/name_' + str(file) + '.txt'
                 with open(path+name, 'w') as fe:
                     fe.write(files)
-
+                folder_name = 'Initial_I'
+                folder_path = os.path.join(path, folder_name)
+                if not os.path.exists(folder_path):
+                    # Create the folder if it doesn't exist
+                    os.makedirs(folder_path)
                 name = './Initial_I/Initial_I' + '_' + str(file) + '.txt'
                 np.savetxt(path+name, I)
+                folder_name = 'Initial_Iـex'
+                folder_path = os.path.join(path, folder_name)
+                if not os.path.exists(folder_path):
+                    # Create the folder if it doesn't exist
+                    os.makedirs(folder_path)
                 name = './Initial_I_ex/Initial_I_ex' + '_' + str(file) + '.txt'
                 np.savetxt(path+name, I_ex)
+                folder_name = 'Best_I'
+                folder_path = os.path.join(path, folder_name)
+                if not os.path.exists(folder_path):
+                    # Create the folder if it doesn't exist
+                    os.makedirs(folder_path)
                 name = './Best_I/Best_I' + '_' + str(file) + '.txt'
                 np.savetxt(path+name, Best)
+                folder_name = 'Best_I_ex'
+                folder_path = os.path.join(path, folder_name)
+                if not os.path.exists(folder_path):
+                    # Create the folder if it doesn't exist
+                    os.makedirs(folder_path)
                 name = './Best_I_ex/Best_I_ex' + '_' + str(file) + '.txt'
                 np.savetxt(path+name, Best_ex)
+                folder_name = 'Avtask'
+                folder_path = os.path.join(path, folder_name)
+                if not os.path.exists(folder_path):
+                    # Create the folder if it doesn't exist
+                    os.makedirs(folder_path)
                 name = './Avtask/Avtask' + '_' + str(file) + '.txt'
                 np.savetxt(path+name, Avtask)
+                folder_name = 'AvCoauth'
+                folder_path = os.path.join(path, folder_name)
+                if not os.path.exists(folder_path):
+                    # Create the folder if it doesn't exist
+                    os.makedirs(folder_path)
                 name = './AvCoauth/AvCoauth' + '_' + str(file) + '.txt'
                 np.savetxt(path+name, AvCoauth)
+                folder_name = 'Avauth'
+                folder_path = os.path.join(path, folder_name)
+                if not os.path.exists(folder_path):
+                    # Create the folder if it doesn't exist
+                    os.makedirs(folder_path)
                 name = './Avauth/Avauth' + '_' + str(file) + '.txt'
                 np.savetxt(path+name, Avauth)
+                folder_name = 'MaxT'
+                folder_path = os.path.join(path, folder_name)
+                if not os.path.exists(folder_path):
+                    # Create the folder if it doesn't exist
+                    os.makedirs(folder_path)
                 name = './MaxT/MaxT' + '_' + str(file) + '.txt'
                 np.savetxt(path+name, MaxT)
+                folder_name = 'MinT'
+                folder_path = os.path.join(path, folder_name)
+                if not os.path.exists(folder_path):
+                    # Create the folder if it doesn't exist
+                    os.makedirs(folder_path)
                 name = './MinT/MinT' + '_' + str(file) + '.txt'
                 np.savetxt(path+name, MinT)
+                folder_name = 'VarT'
+                folder_path = os.path.join(path, folder_name)
+                if not os.path.exists(folder_path):
+                    # Create the folder if it doesn't exist
+                    os.makedirs(folder_path)
                 name = './VarT/VarT' + '_' + str(file) + '.txt'
                 np.savetxt(path+name, VarT)
 
+                folder_name = 'Best_AlgCon'
+                folder_path = os.path.join(path, folder_name)
+                if not os.path.exists(folder_path):
+                    # Create the folder if it doesn't exist
+                    os.makedirs(folder_path)
                 name = './Best_AlgCon/Best_AlgCon' + '_' + str(file) + '.txt'
                 np.savetxt(path+name, AlgCon)
+                folder_name = 'Best_AlgCon_best'
+                folder_path = os.path.join(path, folder_name)
+                if not os.path.exists(folder_path):
+                    # Create the folder if it doesn't exist
+                    os.makedirs(folder_path)
                 name = './Best_AlgCon_best/Best_AlgCon_best' + '_' + str(file) + '.txt'
                 np.savetxt(path+name, AlgCon_best)
+                folder_name = 'penalty_fun'
+                folder_path = os.path.join(path, folder_name)
+                if not os.path.exists(folder_path):
+                    # Create the folder if it doesn't exist
+                    os.makedirs(folder_path)
                 name = './penalty_fun/penalty_fun' + '_' + str(file) + '.txt'
                 np.savetxt(path+name, penalty_fun)
 
             else:
-                os.chdir(params['res_path'])
+                folder_path = params['res_path']
+                if not os.path.exists(folder_path):
+                    # Create the folder if it doesn't exist
+                    os.makedirs(folder_path)
+                os.chdir(folder_path)
                 # plot of optimising trace of algebraic connectivity
                 fig = plt.figure(figsize=(8, 6), dpi=400)
                 plt.plot(OptimisingTrack_phase1['ac'])
@@ -200,17 +281,17 @@ def Run_exp(params):
                 plt.ylabel("Average Number of Papers per Author")
                 plt.xlabel("Optimization Round")
 
-                file_name = f"results/APS/APS_2years/APS_{params['Algorithm']}_{data_path[7:-4]}_OptimisingTrack.pkl"
+                file_name = f"{folder_path}/APS_{params['Algorithm']}_{data_path[7:-4]}_OptimisingTrack.pkl"
                 print(file_name)
                 with open(file_name, 'wb') as file:
                     pickle.dump(OptimisingTrack_phase1, file)
 
-                file_name = f"results/APS/APS_2years/APS_{params['Algorithm']}_{data_path[7:-4]}_gamma.pkl"
+                file_name = f"{folder_path}/APS_{params['Algorithm']}_{data_path[7:-4]}_gamma.pkl"
                 print(file_name)
                 with open(file_name, 'wb') as file:
                     pickle.dump(gamma_phase1, file)
 
-                file_name = f"results/APS/APS_2years/APS_{params['Algorithm']}_{data_path[7:-4]}_I.pkl"
+                file_name = f"{folder_path}/APS_{params['Algorithm']}_{data_path[7:-4]}_I.pkl"
                 print(file_name)
                 with open(file_name, 'wb') as file:
                     pickle.dump(I_phase1, file)
@@ -222,9 +303,11 @@ def Run_exp(params):
 
 
     elif params["data"]=="MAG":
-
         file = 'MAG_Hypergraph_Title_Only'
         logging_path = params["logging_path"] + file
+        if not os.path.exists(logging_path):
+            # Create the folder if it doesn't exist
+            os.makedirs(logging_path)
         logging.basicConfig(filename=logging_path, filemode='w', level=logging.INFO)
         log = logging.getLogger('main')
 
@@ -296,54 +379,137 @@ def Run_exp(params):
                 B, Buds,
                 params['sym'], params);
 
-        time = timeit.default_timer() - temp_time
+        else:
+            data_path = params['folder_path']
+
+            # Number of processors for parallel processing
+            n_proc = 80
+
+            data = pd.read_csv(data_path, sep=' ', header=None)
+            data_int = np.ceil(data)
+            budget = np.array(data_int.sum(axis=1))
+            energy = np.array(data_int.sum(axis=0))
+
+            if params["Algorithm"] == 'Greedy':
+                projection = 'hypergraph'
+                start_time = timeit.default_timer()
+                I0_connected, gamma0_connected = greedy_connected_initialisation(budget, energy)
+                I_phase1, OptimisingTrack_phase1, gamma_phase1 = Greedy_bestagent_parallel(budget, energy, I0_connected,
+                                                                                           gamma0_connected, n_proc,
+                                                                                           projection)
+                end_time = timeit.default_timer()
+            elif params["Algorithm"] == 'RandomGreedy':
+                Nagents_thres = 100
+                projection = 'hypergraph'
+                I0_connected, gamma0_connected = greedy_connected_initialisation(budget, energy)
+                I_phase1, OptimisingTrack_phase1, gamma_phase1 = RandomGreedy_bestagent_parallel(budget, energy,
+                                                                                                 I0_connected,
+                                                                                                 gamma0_connected,
+                                                                                                 n_proc, Nagents_thres,
+                                                                                                 projection)
+            elif params["Algorithm"] == 'GreedyBipartite':
+                projection = 'bipartite'
+                I0_connected, gamma0_connected = greedy_connected_initialisation(budget, energy)
+                I_phase1, OptimisingTrack_phase1, gamma_phase1 = Greedy_bestagent_parallel(budget, energy, I0_connected,
+                                                                                           gamma0_connected, n_proc,
+                                                                                           projection)
+            elif params["Algorithm"] == 'RandomGreedyBipartite':
+                Nagents_thres = 100
+                projection = 'bipartite'
+                I0_connected, gamma0_connected = greedy_connected_initialisation(budget, energy)
+                I_phase1, OptimisingTrack_phase1, gamma_phase1 = RandomGreedy_bestagent_parallel(budget, energy,
+                                                                                                 I0_connected,
+                                                                                                 gamma0_connected,
+                                                                                                 n_proc, Nagents_thres,
+                                                                                                 projection)
+
+        if params["Algorithm"] == 'CSA' or params["Algorithm"] == 'CSA_Bipartite':
+
+            timer = timeit.default_timer() - temp_time
 
 
-        log.info(f'{file}:, running time: {time}')
+            log.info(f'{file}:, running time: {timer}')
 
 
 
 
-        path = params['res_path']
+            path = params['res_path']
+            if not os.path.exists(path):
+                # Create the folder if it doesn't exist
+                os.makedirs(path)
 
-        name = 'Initial_I.txt'
-        np.savetxt(path+name, I)
-        name = 'Initial_I_ex.txt'
-        np.savetxt(path+name, I_ex)
-        name = 'Best_I.txt'
-        np.savetxt(path+name, Best)
-        name = 'Best_I_ex.txt'
-        np.savetxt(path+name, Best_ex)
-        name = 'Avtask.txt'
-        np.savetxt(path+name, Avtask)
-        name = 'AvCoauth.txt'
-        np.savetxt(path+name, AvCoauth)
-        name = 'Avauth.txt'
-        np.savetxt(path+name, Avauth)
-        name = 'MaxT.txt'
-        np.savetxt(path+name, MaxT)
-        name = 'MinT.txt'
-        np.savetxt(path+name, MinT)
-        name = 'VarT.txt'
-        np.savetxt(path+name, VarT)
-
-
-        name = 'Best_AlgCon.txt'
-        np.savetxt(path+name, AlgCon)
-        name = 'Best_AlgCon_best.txt'
-        np.savetxt(path+name, AlgCon_best)
-        name = 'Best_penalty_fun.txt'
-        np.savetxt(path+name, penalty_fun)
+            name = 'Initial_I.txt'
+            np.savetxt(path+name, I)
+            name = 'Initial_I_ex.txt'
+            np.savetxt(path+name, I_ex)
+            name = 'Best_I.txt'
+            np.savetxt(path+name, Best)
+            name = 'Best_I_ex.txt'
+            np.savetxt(path+name, Best_ex)
+            name = 'Avtask.txt'
+            np.savetxt(path+name, Avtask)
+            name = 'AvCoauth.txt'
+            np.savetxt(path+name, AvCoauth)
+            name = 'Avauth.txt'
+            np.savetxt(path+name, Avauth)
+            name = 'MaxT.txt'
+            np.savetxt(path+name, MaxT)
+            name = 'MinT.txt'
+            np.savetxt(path+name, MinT)
+            name = 'VarT.txt'
+            np.savetxt(path+name, VarT)
 
 
+            name = 'Best_AlgCon.txt'
+            np.savetxt(path+name, AlgCon)
+            name = 'Best_AlgCon_best.txt'
+            np.savetxt(path+name, AlgCon_best)
+            name = 'Best_penalty_fun.txt'
+            np.savetxt(path+name, penalty_fun)
+        else:
+            folder_path = params['res_path']
+            if not os.path.exists(folder_path):
+                # Create the folder if it doesn't exist
+                os.makedirs(folder_path)
+            os.chdir(folder_path)
+            # plot of optimising trace of algebraic connectivity
+            fig = plt.figure(figsize=(8, 6), dpi=400)
+            plt.plot(OptimisingTrack_phase1['ac'])
+            plt.xlabel("Optimization Round")
+            plt.ylabel("Algebraic Connectivity")
 
+            # plot of optimising trace of Average Number of Co-Authors
+            fig = plt.figure(figsize=(8, 6), dpi=400)
+            plt.plot(OptimisingTrack_phase1['N_avg_coauthors'])
+            plt.ylabel("Average Number of Co-Authors")
+            plt.xlabel("Optimization Round")
 
+            # plot of optimising trace of Average Number of Authors per paper
+            fig = plt.figure(figsize=(8, 6), dpi=400)
+            plt.plot(OptimisingTrack_phase1['avg_Nauthors_per_paper'])
+            plt.ylabel("Average Number of Authors per paper")
+            plt.xlabel("Optimization Round")
 
+            # plot of optimising trace of Average Number of Papers per Author
+            fig = plt.figure(figsize=(8, 6), dpi=400)
+            plt.plot(OptimisingTrack_phase1['avg_Npapers_per_author'])
+            plt.ylabel("Average Number of Papers per Author")
+            plt.xlabel("Optimization Round")
 
+            file_name = f"{folder_path}/APS_{params['Algorithm']}_{data_path[7:-4]}_OptimisingTrack.pkl"
+            print(file_name)
+            with open(file_name, 'wb') as file:
+                pickle.dump(OptimisingTrack_phase1, file)
 
+            file_name = f"{folder_path}/APS_{params['Algorithm']}_{data_path[7:-4]}_gamma.pkl"
+            print(file_name)
+            with open(file_name, 'wb') as file:
+                pickle.dump(gamma_phase1, file)
 
-
-
+            file_name = f"{folder_path}/APS_{params['Algorithm']}_{data_path[7:-4]}_I.pkl"
+            print(file_name)
+            with open(file_name, 'wb') as file:
+                pickle.dump(I_phase1, file)
 
 
 with open('./Config/CSA_MAG_Bipartite.json') as f:
